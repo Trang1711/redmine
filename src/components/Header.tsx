@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LogOut, User, Menu, X, Home, Info, LayoutDashboard } from "lucide-react";
+import { LogOut, User, Menu, X, Home, Info } from "lucide-react";
 
 export default function Header() {
   const pathname = usePathname();
@@ -38,41 +38,44 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-md text-slate-800 shadow-sm">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center gap-2">
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 shadow-md shadow-cyan-500/10 transition-transform group-hover:scale-105">
-                <LayoutDashboard className="h-5 w-5 text-white" />
-              </div>
-              <span className="bg-gradient-to-r from-slate-900 via-slate-800 to-cyan-600 bg-clip-text text-lg font-bold tracking-tight text-transparent">
-                Redmine Portal
-              </span>
-            </Link>
-          </div>
+          <div className="flex items-center gap-8">
+            {/* Logo */}
+            <div className="flex items-center gap-2">
+              <Link href="/" className="flex items-center gap-2 group">
+                <img
+                  src="/logogenome.png"
+                  alt="Redmine Logo"
+                  className="h-14 w-auto object-contain transition-transform group-hover:scale-105"
+                />
+                <span className="bg-gradient-to-r from-slate-900 via-slate-800 to-cyan-600 bg-clip-text text-xl font-bold tracking-tight text-transparent">
+                  Redmine
+                </span>
+              </Link>
+            </div>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) => {
-              const Icon = link.icon;
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                    isActive
-                      ? "bg-slate-100 text-cyan-600"
-                      : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                  }`}
-                >
-                  <Icon className="h-4 w-4" />
-                  {link.label}
-                </Link>
-              );
-            })}
-          </nav>
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex items-center gap-6">
+              {navLinks.map((link) => {
+                const Icon = link.icon;
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${isActive
+                        ? "bg-slate-100 text-cyan-600"
+                        : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                      }`}
+                  >
+                    <Icon className="h-4 w-4" />
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
 
           {/* User Profile & Logout (Desktop) */}
           <div className="hidden md:flex items-center gap-4">
@@ -118,11 +121,10 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-colors ${
-                    isActive
+                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-colors ${isActive
                       ? "bg-slate-100 text-cyan-600"
                       : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                  }`}
+                    }`}
                 >
                   <Icon className="h-5 w-5" />
                   {link.label}
